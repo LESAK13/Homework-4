@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <title>Coding Quiz</title>
+</head>
+
+<body>
+    <br>
+    <div class="container">
+        <div class="row">
+            <h1>Kevin's Coding Quiz</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <h2 id="countdown"></h2>
+        </div>
+        <br>
+        <div class="row">
+            <h4>Click the button to begin the quiz. Once you click, you will have 60 seconds to complete the quiz.</h4>
+        </div>
+        <br>
+        <div class="row">
+            <button type="button" class="btn btn-primary" id="startClick">Start Quiz</button>
+        </div>
+        <div id="question">
+            <div id="answers">
+            </div>
+        </div>
+        <br>
+    </div>
+</body>
+
+    <script>
+        var timer = document.getElementById("countdown");
+        var counter = 60
+
+        document.getElementById("startClick").addEventListener("click", startQuiz);
+
+        function startQuiz() {
+            var timerCountdown = setInterval(
+                function () {
+                    counter--;
+                    timer.textContent = "Timer:" + counter;
+                }, 1000);
+            var removeBtn = document.getElementById('startClick');
+            removeBtn.remove();
+            QuestionOne();
+        }
+        function QuestionOne () {
+            var questionOne = document.createElement("h3");
+            var questionText = document.createTextNode("What is 5 + 4?");
+            questionOne.appendChild(questionText);
+            var questionDiv = document.getElementById("question");
+            questionDiv.appendChild(questionOne);
+            var answersArr = ['answer1', 'answer2', 'answer3', 'answer4'];
+            for (var i = 0; i < answersArr.length; i++) {
+                var answerBtn = document.createELement("button");
+                answerBtn.innerHTML = answersArr[i];
+                document.body.appendChild(answerBtn);
+            }
+            }
+        
+
+        var option = document.createElement("button");
+    option.innerHTML = optionText[i];
+    document.body.appendChild(option);
+
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+</html>
