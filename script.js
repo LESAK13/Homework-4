@@ -1,7 +1,10 @@
 var start = document.getElementById("start");
 var instructions = document.getElementById("instructions");
+var scoreDiv = document.getElementById("scoreDiv");
 var scoreDisplay = document.getElementById("score");
+var scoreTitle = document.getElementById("scoreTitle");
 var score = 0;
+var finalScore = document.getElementById("finalScore");
 var quiz = document.getElementById("quiz");
 var question = document.getElementById("question");
 var answers = [];
@@ -53,7 +56,7 @@ var questions = [
     },
 ]
 
-var lastQuestion = questions.length - 1
+var lastQuestion = questions.length - 1;
 var timerId;
 
 function startQuiz() {
@@ -71,14 +74,16 @@ function startQuiz() {
 
 function clickCorrect() {
     if (currentQuestion >= lastQuestion) {
+        score += 10;
+        scoreDisplay.innerHTML = score;
         endQuiz();
-    }else{
+    } else{
         score += 10;
         scoreDisplay.innerHTML = score;
         outcome.textContent = "Correct";
         setTimeout(function () {
             outcome.textContent = "";
-        }, 1000);
+        }, 2000);
         displayQuestion(++currentQuestion);
     }
 }
@@ -86,12 +91,12 @@ function clickCorrect() {
 function clickIncorrect() {
     if (currentQuestion >= lastQuestion) {
         endQuiz();
-    }else{
+    } else{
     quizTime -= 10;
     outcome.textContent = "Wrong";
     setTimeout(function () {
         outcome.textContent = "";
-    }, 1000);
+    }, 2000);
     displayQuestion(++currentQuestion);
     }
 }
@@ -112,10 +117,15 @@ function displayQuestion(questionNumber) {
 }
 
 function endQuiz() {
+    var adaptedFinalScore = Math.round(quizTime/4+score);
+    var userName = document.getElementById("userName");
     quiz.style.display = "none";
     clearInterval(timerId);
-    timerCountdown.textContent = "Quiz Complete";
+    timerCountdown.textContent = "";
     highscores.style.display = "block";
+    scoreDiv.style.display = "none";
+    finalScore.textContent = "Your Final Score is " + adaptedFinalScore;
+    localStorage.setItem("userName", userName.textContent);
 }
 
 

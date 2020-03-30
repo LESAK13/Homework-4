@@ -18,13 +18,13 @@
         <div class ="row">
         <h1 id="title">Kevin's NFL Quiz</h1>
         </div>
-        
+
         <div class ="row">
             <h2 id="countdown"></h2>
         </div>
         
         <div class ="row">
-            <h2 id="instructions">Click on the button to begin the quiz.  Once you click, you will have 60 seconds to complete the quiz.  Each correct answer is worth 10 points.  For every incorrect answer, the timer decreases by 10 seconds.</h2>
+            <h2 id="instructions">Click on the button to begin the quiz.  Once you click, you will have 60 seconds to complete the quiz.  Each correct answer is worth 10 points.  For every incorrect answer, the timer decreases by 10 seconds.  Your final score is determined based on the number of correct answers and time remaining.</h2>
         </div>
         
         <div class ="row">
@@ -39,10 +39,24 @@
             <button type="button" class="btn btn-primary btn-lg" id="answer4"></button>
             <h2 id="outcome"></h2>
         </div>
+        <div id="scoreDiv">
         <h2 id="scoreTitle">Score:</h2>
             <h3 id="score">0</h3>
-        <div id="highscores" style = "display : none"></div>
-    </div>
+        </div>
+
+        <div id="highscores" style = "display : none">
+            <h2>Quiz Complete</h2>
+            <h3 id="finalScore"></h3>
+            <form>
+                <div class="form-group">
+                    <label for="userName">Enter Your Name</label>
+                    <input type="text" class="form-control" id="userName">
+                </div>
+            </form>
+        </div>
+        
+        </div>
+
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
