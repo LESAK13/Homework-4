@@ -1,4 +1,5 @@
 var start = document.getElementById("start");
+var instructions = document.getElementById("instructions");
 var scoreDisplay = document.getElementById("score");
 var score = 0;
 var quiz = document.getElementById("quiz");
@@ -12,6 +13,8 @@ var outcome = document.getElementById("outcome");
 var timerCountdown = document.getElementById("countdown");
 var quizTime = 60;
 var currentQuestion = 0;
+var highscores = document.getElementById("highscores");
+
 
 document.getElementById("start").addEventListener("click", startQuiz);
 
@@ -48,54 +51,72 @@ var questions = [
         options: ["Jerry Rice", "Brandon Marshall", "Terrell Owens", "Tim Brown"],
         correctOption: 1
     },
-];
+]
+
+var lastQuestion = questions.length - 1
+var timerId;
 
 function startQuiz() {
-    setInterval(function () {
-        timerCountdown.textContent = "Timer: " + quizTime
+    timerId = setInterval(function () {
+        timerCountdown.textContent = "Timer: " + quizTime;
         quizTime--;
+        if (quizTime <= 0) {
+            endQuiz();
+        }
     }, 1000);
     start.style.display = "none";
+    instructions.style.display = "none";
     displayQuestion(0);
-};
+}
 
 function clickCorrect() {
-    score += 10;
-    scoreDisplay.innerHTML = score;
-    outcome.textContent = "Correct";
-    setInterval(function () {
-        outcome.textContent = "";
-    }, 3000);
-    displayQuestion(++currentQuestion);
-};
+    if (currentQuestion >= lastQuestion) {
+        endQuiz();
+    }else{
+        score += 10;
+        scoreDisplay.innerHTML = score;
+        outcome.textContent = "Correct";
+        setTimeout(function () {
+            outcome.textContent = "";
+        }, 1000);
+        displayQuestion(++currentQuestion);
+    }
+}
 
 function clickIncorrect() {
+    if (currentQuestion >= lastQuestion) {
+        endQuiz();
+    }else{
+    quizTime -= 10;
     outcome.textContent = "Wrong";
-    setInterval(function () {
+    setTimeout(function () {
         outcome.textContent = "";
-    }, 3000);
+    }, 1000);
     displayQuestion(++currentQuestion);
-};
+    }
+}
+
+function displayQuestion(questionNumber) {
+    quiz.style.display = "block";
+    question.textContent = questions[questionNumber].question;
+    for (var i = 0; i < answers.length; i++) {
+        answers[i].innerHTML = questions[questionNumber].options[i];
+        if (i == questions[questionNumber].correctOption) {
+            answers[i].addEventListener("click", clickCorrect);
+            answers[i].removeEventListener("click", clickIncorrect);
+        } else {
+            answers[i].addEventListener("click", clickIncorrect);
+            answers[i].removeEventListener("click", clickCorrect);
+        }
+    }
+}
 
 function endQuiz() {
     quiz.style.display = "none";
-};
-
-var displayQuestion = function displayQ(questionNumber) {
-    quiz.style.display = "block";
-    question.textContent = questions[questionNumber].question;
-    if (currentQuestion > 4 || quizTime == 0) {
-        endQuiz
-    }else
-    for (var i = 0; i < answers.length; i++) {
-        answers[i].innerHTML = questions[currentQuestion].options[i];
-        if (i == questions[currentQuestion].correctOption) {
-            answers[i].addEventListener("click", clickCorrect);
-        }else{
-            answers[i].addEventListener("click", clickIncorrect);
-        };
-    };
-};
+    clearInterval(timerId);
+    timerCountdown.textContent = "Quiz Complete";
+    highscores.style.display = "block";
+}
 
 
 

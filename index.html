@@ -24,14 +24,14 @@
         </div>
         
         <div class ="row">
-            <h2 id="instructions">Click on the button to begin the quiz.  Once you click, you will have 60 seconds to complete the quiz.</h2>
+            <h2 id="instructions">Click on the button to begin the quiz.  Once you click, you will have 60 seconds to complete the quiz.  Each correct answer is worth 10 points.  For every incorrect answer, the timer decreases by 10 seconds.</h2>
         </div>
         
         <div class ="row">
         <button type="button" class="btn btn-primary btn-lg" id="start">Start Quiz</button>
         </div>
        
-        <div id="quiz" style = "display : none;">
+        <div id="quiz" style = "display : none">
             <h1 id="question"></h1>
             <button type="button" class="btn btn-primary btn-lg" id="answer1"></button>
             <button type="button" class="btn btn-primary btn-lg" id="answer2"></button>
@@ -40,7 +40,8 @@
             <h2 id="outcome"></h2>
         </div>
         <h2 id="scoreTitle">Score:</h2>
-            <h3 id ="score">0</h3>
+            <h3 id="score">0</h3>
+        <div id="highscores" style = "display : none"></div>
     </div>
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
